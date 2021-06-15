@@ -4,10 +4,14 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.List;
 
+import org.quinto.dawg.DAWGSet;
+
 public class BoardSolver {
-    public static BoardState solve(BoardState boardState) {
+    public static BoardState solve(BoardState boardState, DAWGSet dawg) {
         List<List<List<Character>>> grid = boardState.getGrid();
         Deque<Character> hand = new ArrayDeque<Character>(boardState.getHand());
+
+        
 
         for (List<List<Character>> row : grid) {
             if (hand.size() == 0) break;
