@@ -49,7 +49,7 @@ public class RowCrossCheckerTest {
 
     /**
      * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
-     * Case: The middle row of a 3x3 grid is examined.<P/>
+     * Case: The bottom row of a 3x3 grid is examined.<P/>
      * Result: The top and middle rows are examined to create 'words'
      *  according to the dawg and the corresponding characters are returned in a list of lists.
      */
@@ -78,7 +78,7 @@ public class RowCrossCheckerTest {
 
     /**
      * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
-     * Case: The middle row of a 3x3 grid is examined.<P/>
+     * Case: The top row of a 3x3 grid is examined.<P/>
      * Result: The middle and bottom rows are examined to create 'words'
      *  according to the dawg and the corresponding characters are returned in a list of lists.
      */

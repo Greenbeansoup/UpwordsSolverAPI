@@ -1,6 +1,7 @@
 package com.upwordsapi.upwords;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 
@@ -22,5 +23,23 @@ public class BoardSolver {
         }
 
         return boardState;
+    }
+
+    /**
+     * Method to transpose a 2D list.
+     * @param <T> The type of the inner list.
+     * @param table The 2D list to transpose.
+     * @return The same 2D list but transposed.
+     */
+    private static <T> List<List<T>> transpose(List<List<T>> table) {
+        List<List<T>> ret = new ArrayList<List<T>>();
+        for (int i = 0; i < table.get(0).size(); i++) {
+            List<T> col = new ArrayList<T>();
+            for (List<T> row : table) {
+                col.add(row.get(i));
+            }
+            ret.add(col);
+        }
+        return ret;
     }
 }
