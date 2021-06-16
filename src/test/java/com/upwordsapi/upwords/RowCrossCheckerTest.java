@@ -1,6 +1,7 @@
 package com.upwordsapi.upwords;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static com.upwordsapi.upwords.TestUtils.rowBuilder;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -242,24 +243,10 @@ public class RowCrossCheckerTest {
         grid.add(rowBuilder(Arrays.asList("*", "*", "*", "*", "*", "*", "*", "*", "*", "*")));
         grid.add(rowBuilder(Arrays.asList("*", "*", "*", "*", "*", "I", "T", "*", "*", "*")));
         grid.add(rowBuilder(Arrays.asList("*", "*", "*", "*", "*", "*", "*", "*", "*", "*")));
-
+        
         RowCrossChecker checker = new RowCrossChecker(grid, dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(5);
 
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
-    }
-
-    /**
-     * Convenience method for building out rows of character columns from lists of strings.
-     * @param input List of strings to convert to list of characters.
-     * @return List of Lists of characters that represent an upwords grid row.
-     */
-    private List<List<Character>> rowBuilder(List<String> input) {
-        List<List<Character>> row = new ArrayList<>();
-        for (String s : input) {
-            List<Character> column = Arrays.asList(s.chars().mapToObj(c -> (char)c).toArray(Character[]::new));
-            row.add(column);
-        }
-        return row;
     }
 }

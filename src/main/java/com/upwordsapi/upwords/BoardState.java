@@ -2,8 +2,6 @@ package com.upwordsapi.upwords;
 
 import java.util.List;
 
-import javax.persistence.ElementCollection;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,6 +12,5 @@ import lombok.Getter;
 public class BoardState {
     List<List<List<Character>>> grid;
 
-    @ElementCollection
     List<Character> hand;
 }

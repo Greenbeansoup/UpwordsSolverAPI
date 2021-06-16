@@ -16,6 +16,13 @@ public class RowCrossChecker {
         this.dawg = dawg;
     }
 
+    /**
+     * Computes the valid characters that can be placed in a given row by iterating over the
+     * individual grid locations and looking at the contiguous letters
+     * above and below it. (This is referred to as a cross-check).
+     * @param rowInd The row for which to run the cross-check.
+     * @return A list containing sets of valid characters for each of the corresponding spaces in the indicated row.
+     */
     public List<Set<Character>> computeCrossChecks(int rowInd) {
         List<List<Character>> row = grid.get(rowInd);
         List<Set<Character>> legalCharacters = new ArrayList<>();
@@ -30,7 +37,7 @@ public class RowCrossChecker {
                 if (Character.isAlphabetic(topChar)) prefix.append(topChar);
                 else if (!prefix.isEmpty()) prefix.setLength(0);
             }
-            for (int j = rowInd + 1; j < row.size(); j++) { // iterate over rows after row in question
+            for (int j = rowInd + 1; j < grid.size(); j++) { // iterate over rows after row in question
                 int stackSize = grid.get(j).get(i).size();
                 Character topChar = grid.get(j).get(i).get(stackSize - 1);
                 if (Character.isAlphabetic(topChar)) suffix.append(topChar);
