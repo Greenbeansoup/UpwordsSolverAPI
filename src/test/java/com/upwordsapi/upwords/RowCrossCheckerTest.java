@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+
+import com.upwordsapi.upwords.solve.RowCrossChecker;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -43,7 +46,36 @@ public class RowCrossCheckerTest {
         List<List<Character>> row3 = rowBuilder(Arrays.asList("GGG", "HHH", "III"));
         grid.add(row3);
 
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, new HashSet<>(), dawg); // empty hash set so it checks the whole alphabet
+        List<Set<Character>> crossCheckResults = checker.computeCrossChecks(1);
+        assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
+    }
+
+    /**
+     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Case: The middle row of a 3x3 grid is examined and there is a non-empty hand.<P/>
+     * Result: The top and bottom rows are examined to create 'words'
+     *  according to the dawg and the corresponding characters are returned in a list of lists.
+     */
+    @Test
+    public void testComputeCrossChecks_smallGridMidRowWithHand() {
+        DAWGSet dawg = new ModifiableDAWGSet();
+        dawg.addAll(Arrays.asList("ALG", "BRH", "COI", "AAG", "FFF", "ASP"));
+        List<Set<Character>> validChars = new ArrayList<>();
+        Set<Character> hand = new HashSet<>(Arrays.asList('L', 'R', 'O'));
+        validChars.add(new HashSet<>(Arrays.asList(Character.valueOf('L'))));
+        validChars.add(new HashSet<>(Arrays.asList(Character.valueOf('R'))));
+        validChars.add(new HashSet<>(Arrays.asList(Character.valueOf('O'))));
+
+        List<List<List<Character>>> grid = new ArrayList<>();
+        List<List<Character>> row1 = rowBuilder(Arrays.asList("AAA", "BBB", "CCC"));
+        grid.add(row1);
+        List<List<Character>> row2 = rowBuilder(Arrays.asList("DDD", "EEE", "FFF"));
+        grid.add(row2);
+        List<List<Character>> row3 = rowBuilder(Arrays.asList("GGG", "HHH", "III"));
+        grid.add(row3);
+
+        RowCrossChecker checker = new RowCrossChecker(grid, hand, dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(1);
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
     }
@@ -71,7 +103,7 @@ public class RowCrossCheckerTest {
         List<List<Character>> row3 = rowBuilder(Arrays.asList("GGG", "HHH", "III"));
         grid.add(row3);
 
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, new HashSet<>(), dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(2);
 
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
@@ -100,7 +132,7 @@ public class RowCrossCheckerTest {
         List<List<Character>> row3 = rowBuilder(Arrays.asList("GGG", "HHH", "III"));
         grid.add(row3);
 
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, new HashSet<>(), dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(0);
 
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
@@ -128,7 +160,7 @@ public class RowCrossCheckerTest {
         List<List<Character>> row3 = rowBuilder(Arrays.asList("***", "***", "***"));
         grid.add(row3);
 
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, new HashSet<>(), dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(0);
 
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
@@ -156,7 +188,7 @@ public class RowCrossCheckerTest {
         List<List<Character>> row3 = rowBuilder(Arrays.asList("GGG", "HHH", "III"));
         grid.add(row3);
 
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, new HashSet<>(), dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(0);
 
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
@@ -200,7 +232,7 @@ public class RowCrossCheckerTest {
         grid.add(rowBuilder(Arrays.asList("*", "*", "*", "*", "*", "*", "*", "*", "*", "*")));
         grid.add(rowBuilder(Arrays.asList("*", "*", "*", "*", "*", "*", "*", "*", "*", "*")));
 
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, new HashSet<>(), dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(6);
 
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());
@@ -244,7 +276,7 @@ public class RowCrossCheckerTest {
         grid.add(rowBuilder(Arrays.asList("*", "*", "*", "*", "*", "I", "T", "*", "*", "*")));
         grid.add(rowBuilder(Arrays.asList("*", "*", "*", "*", "*", "*", "*", "*", "*", "*")));
         
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, new HashSet<>(), dawg);
         List<Set<Character>> crossCheckResults = checker.computeCrossChecks(5);
 
         assertArrayEquals(validChars.toArray(), crossCheckResults.toArray());

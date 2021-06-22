@@ -1,49 +1,39 @@
-package com.upwordsapi.upwords;
+package com.upwordsapi.upwords.solve;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.upwordsapi.upwords.board.BoardState;
+
 import org.quinto.dawg.DAWGSet;
 
-public class BoardSolver {
-    public static BoardState solve(BoardState boardState, DAWGSet dawg) {
+public class BoardSolver implements IBoardSolver {
+    @Override
+    public BoardState solve(BoardState boardState, DAWGSet dawg) {
         List<List<List<Character>>> grid = boardState.getGrid();
-        Deque<Character> hand = new ArrayDeque<Character>(boardState.getHand());
+        Set<Character> hand = new HashSet<Character>(boardState.getHand());
 
-        List<List<Set<Character>>> legalPlays = findLegalCharacters(grid, dawg);
+        List<List<Set<Character>>> legalPlays = findLegalCharacters(grid, hand, dawg);
         // TODO: Use the legal plays to solve the board.
-
-        // Placeholder function.
-        for (List<List<Character>> row : grid) {
-            if (hand.size() == 0) break;
-            for (List<Character> col : row) {
-                if (hand.size() == 0) break;
-                col.add(hand.poll());
-            }
-        }
 
         return boardState;
     }
 
-    /**
-     * Finds all possible plays in the grid by running cross-checks along each row and column.
-     * @param grid The grid to investigate.
-     * @param dawg The dictionary.
-     * @return A 2D list containing sets representing all possible plays for each corresponding position in grid.
-     */
-    public static List<List<Set<Character>>> findLegalCharacters(List<List<List<Character>>> grid, DAWGSet dawg) {
+    @Override
+    public List<List<Set<Character>>> findLegalCharacters(List<List<List<Character>>> grid, Set<Character> hand, DAWGSet dawg) {
         int N = grid.size(); // Board must be square for this to work.
 
-        RowCrossChecker checker = new RowCrossChecker(grid, dawg);
+        RowCrossChecker checker = new RowCrossChecker(grid, hand, dawg);
         List<List<Set<Character>>> playableChars = new ArrayList<>();
         for (int i = 0; i < N; i++) { // iterate over number of rows
             playableChars.add(checker.computeCrossChecks(i));
         }
 
-        checker = new RowCrossChecker(transpose(grid), dawg); // transpose the board to cross check columns
+        checker = new RowCrossChecker(transpose(grid), hand, dawg); // transpose the board to cross check columns
         List<List<Set<Character>>> playableCharsByColumn = new ArrayList<>();
         for (int i = 0; i < N; i++) { // iterate over number of columns
             playableCharsByColumn.add(checker.computeCrossChecks(i));

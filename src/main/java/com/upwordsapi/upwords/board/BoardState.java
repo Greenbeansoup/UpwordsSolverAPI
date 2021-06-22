@@ -1,4 +1,4 @@
-package com.upwordsapi.upwords;
+package com.upwordsapi.upwords.board;
 
 import java.util.List;
 

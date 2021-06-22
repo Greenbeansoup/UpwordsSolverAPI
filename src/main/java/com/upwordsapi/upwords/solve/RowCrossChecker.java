@@ -1,4 +1,4 @@
-package com.upwordsapi.upwords;
+package com.upwordsapi.upwords.solve;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -10,10 +10,12 @@ import org.quinto.dawg.DAWGSet;
 public class RowCrossChecker {
     private List<List<List<Character>>> grid;
     private DAWGSet dawg;
+    private Set<Character> hand;
 
-    public RowCrossChecker(List<List<List<Character>>> grid, DAWGSet dawg) {
+    public RowCrossChecker(List<List<List<Character>>> grid, Set<Character> hand, DAWGSet dawg) {
         this.grid = grid;
         this.dawg = dawg;
+        this.hand = hand;
     }
 
     /**
@@ -43,11 +45,21 @@ public class RowCrossChecker {
                 if (Character.isAlphabetic(topChar)) suffix.append(topChar);
                 else break;
             }
-            for (int j = 0; j < 26; j++) { // iterate over all letters of the alphabet
-                Character tileCharacter = (char) ('A' + j);
-                String word = prefix.toString() + Character.toString((char) ('A' + j)) + suffix.toString();
-                if (row.get(i).get(row.get(i).size() - 1) != tileCharacter && dawg.contains(word)) { // checking to see if the potential word exists in the dawg and also making sure it's not just the existing character
-                    columnCharacters.add((char) ('A' + j));
+            if (hand.size() > 0) {
+                for (Character c : hand) {
+                    String word = prefix.toString() + c + suffix.toString();
+                    if (row.get(i).get(row.get(i).size() - 1) != c && dawg.contains(word)) {
+                        columnCharacters.add(c);
+                    }
+                }
+            } 
+            else {
+                for (int j = 0; j < 26; j++) { // iterate over all letters of the alphabet
+                    Character tileCharacter = (char) ('A' + j);
+                    String word = prefix.toString() + Character.toString((char) ('A' + j)) + suffix.toString();
+                    if (row.get(i).get(row.get(i).size() - 1) != tileCharacter && dawg.contains(word)) { // checking to see if the potential word exists in the dawg and also making sure the top character is not just the existing character
+                        columnCharacters.add((char) ('A' + j));
+                    }
                 }
             }
         }

@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.upwordsapi.upwords.solve.BoardSolver;
+
 import org.junit.jupiter.api.Test;
 import org.quinto.dawg.DAWGSet;
 import org.quinto.dawg.ModifiableDAWGSet;
@@ -58,8 +60,8 @@ public class BoardSolverTest {
         grid.add(row3);                                                              // ADI which is a word, but
                                                                                      // it would also make IHI which is
                                                                                      // not a word acc. the dawg.
-
-        List<List<Set<Character>>> checkedChars = BoardSolver.findLegalCharacters(grid, dawg);
+        BoardSolver solver = new BoardSolver();
+        List<List<Set<Character>>> checkedChars = solver.findLegalCharacters(grid, new HashSet<>(), dawg);
 
         assertArrayEquals(validChars.toArray(), checkedChars.toArray());
     }
