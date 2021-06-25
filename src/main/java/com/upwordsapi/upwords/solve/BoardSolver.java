@@ -15,9 +15,9 @@ public class BoardSolver implements IBoardSolver {
     @Override
     public BoardState solve(BoardState boardState, DAWGSet dawg) {
         List<List<List<Character>>> grid = boardState.getGrid();
-        Set<Character> hand = new HashSet<Character>(boardState.getHand());
+        Deque<Character> hand = new ArrayDeque<Character>(boardState.getHand());
 
-        List<List<Set<Character>>> legalPlays = findLegalCharacters(grid, hand, dawg);
+        List<List<Set<Character>>> legalPlays = findLegalCharacters(grid, new HashSet<Character>(boardState.getHand()), dawg);
         // TODO: Use the legal plays to solve the board.
 
         return boardState;

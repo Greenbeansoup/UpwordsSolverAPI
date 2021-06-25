@@ -24,7 +24,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RowCrossCheckerTest {
     
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: The middle row of a 3x3 grid is examined.<P/>
      * Result: The top and bottom rows are examined to create 'words'
      *  according to the dawg and the corresponding characters are returned in a list of lists.
@@ -52,7 +52,7 @@ public class RowCrossCheckerTest {
     }
 
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: The middle row of a 3x3 grid is examined and there is a non-empty hand.<P/>
      * Result: The top and bottom rows are examined to create 'words'
      *  according to the dawg and the corresponding characters are returned in a list of lists.
@@ -81,7 +81,7 @@ public class RowCrossCheckerTest {
     }
 
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: The bottom row of a 3x3 grid is examined.<P/>
      * Result: The top and middle rows are examined to create 'words'
      *  according to the dawg and the corresponding characters are returned in a list of lists.
@@ -110,7 +110,7 @@ public class RowCrossCheckerTest {
     }
 
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: The top row of a 3x3 grid is examined.<P/>
      * Result: The middle and bottom rows are examined to create 'words'
      *  according to the dawg and the corresponding characters are returned in a list of lists.
@@ -139,7 +139,7 @@ public class RowCrossCheckerTest {
     }
 
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: There are no letters in the grid.<P/>
      * Result: No characters are returned.
      */
@@ -167,7 +167,7 @@ public class RowCrossCheckerTest {
     }
 
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: There are no possible words in any of the columns.<P/>
      * Result: No characters are returned.
      */
@@ -195,7 +195,7 @@ public class RowCrossCheckerTest {
     }
 
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: There are possible words in a large grid with a full dictionary.<P/>
      * Result: The correct characters are returned according to the dictionary.
      */
@@ -239,7 +239,7 @@ public class RowCrossCheckerTest {
     }
     
     /**
-     * Test for {@link RowCrossChecker.computeCrossChecks(int)}.<P/>
+     * Test for {@link RowCrossChecker#computeCrossChecks(int)}.<P/>
      * Case: There are no possible words in any of the columns.<P/>
      * Result: No characters are returned.
      */

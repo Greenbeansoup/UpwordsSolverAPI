@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class BoardSolverTest {
     
     /**
-     * Test for {@link BoardSolver.findLegalCharacters(List, DAWGSet)}.
+     * Test for {@link BoardSolver#findLegalCharacters(List, DAWGSet)}.
      * Case: There are 3 possible plays that make words.
      * Result: All 3 plays are returned and nothing more.
      */

@@ -1,5 +1,6 @@
 package com.upwordsapi.upwords;
 
+import com.upwordsapi.upwords.solve.BoardSolveType;
 import com.upwordsapi.upwords.solve.BoardSolver;
 import com.upwordsapi.upwords.solve.BoardSolverFactory;
 
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class UpwordsApplication {
 
 	public static void main(String[] args) {
-		BoardSolverFactory.registerDefaultSupplier(BoardSolver.class.getName(), BoardSolver::new);
+		BoardSolverFactory.registerSupplier(BoardSolveType.UPWORDS, BoardSolver::new);
 		SpringApplication.run(UpwordsApplication.class, args);
 	}
 
